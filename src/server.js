@@ -42,6 +42,16 @@ server.get("/:file", (request, reply) => {
   reply.type("text/html").send(stream);
 });
 
+server.get("/index.css", (request, reply) => {
+  const stream = fs.createReadStream(`./index.css`);
+  reply.type("text/css").send(stream);
+});
+
+server.get("/", (request, reply) => {
+  const stream = fs.createReadStream(`./index.html`);
+  reply.type("text/html").send(stream);
+});
+
 server.get("/script.js", async (request, reply) => {
   const { delay, clientdelay } = request.query;
 
