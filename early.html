@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <link rel="preload" href="bigimage.avif?delay=750&c=10" as="image" />
+    <script src="script.js?delay=1000&c=1"></script>
+    <script src="script.js?delay=1000&c=2"></script>
+    <script src="script.js?delay=500&c=3"></script>
+    <script src="script.js?delay=500&c=4"></script>
+    <script src="script.js?delay=500&c=5" defer></script>
+    <script src="script.js?delay=500&c=6" async></script>
+    <script src="script.js?delay=500&c=7" async></script>
+
+    <script src="script.js?delay=1000&c=8" defer></script>
+    <script src="script.js?delay=1000&c=9" defer></script>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <main>
+      <h1>A lot of requests</h1>
+      <img src="image.jpg?c=1" alt="Test Image" />
+      <img src="image.jpg?c=2" alt="Test Image" />
+      <img src="image.jpg?c=3" alt="Test Image" />
+      <img src="image.jpg?c=4" alt="Test Image" />
+      <img src="image.jpg?c=5" alt="Test Image" />
+      <img src="image.jpg?c=6" alt="Test Image" />
+      <img src="image.jpg?c=7" alt="Test Image" />
+      <img src="image.jpg?c=8" alt="Test Image" />
+      <img src="image.jpg?c=9" alt="Test Image" />
+      <img src="bigimage.avif?delay=500&c=10" alt="Test Image" />
+      <script src="script.js?delay=500&c=11" async></script>
+      <script src="script.js?delay=500&c=12" async></script>
+      <script src="script.js?delay=500&c=13" async></script>
+    </main>
+  </body>
+</html>

@@ -31,6 +31,24 @@ server.get("/image.jpg", async (request, reply) => {
   reply.code(200).type("image/jpeg").send(buffer);
 });
 
+server.get("/bigimage.avif", async (request, reply) => {
+  const { delay } = request.query;
+  if (delay) {
+    await new Promise((resolve) => setTimeout(resolve, delay));
+  } else {
+    await new Promise((resolve) => setTimeout(resolve, 100));
+  }
+
+  if (!fs.existsSync(`./img.jpg`)) {
+    reply.code(404).send("File not found");
+    return;
+  }
+
+  const stream = fs.createReadStream(`./img.jpg`);
+  const buffer = await stream2buffer(stream);
+  reply.code(200).type("image/jpeg").send(buffer);
+});
+
 server.get("/:file", (request, reply) => {
   const { file } = request.params;
 
@@ -42,7 +60,12 @@ server.get("/:file", (request, reply) => {
   reply.type("text/html").send(stream);
 });
 
-server.get("/index.css", (request, reply) => {
+server.get("/index.css", async (request, reply) => {
+  const { delay } = request.query;
+  if (delay) {
+    await new Promise((resolve) => setTimeout(resolve, delay));
+  }
+
   const stream = fs.createReadStream(`./index.css`);
   reply.type("text/css").send(stream);
 });
@@ -50,6 +73,10 @@ server.get("/index.css", (request, reply) => {
 server.get("/", (request, reply) => {
   const stream = fs.createReadStream(`./index.html`);
   reply.type("text/html").send(stream);
+});
+server.get("/font.woff", (request, reply) => {
+  const stream = fs.createReadStream(`./font.woff`);
+  reply.type("font/woff2").send(stream);
 });
 
 server.get("/script.js", async (request, reply) => {
@@ -81,7 +108,7 @@ blockPause(${clientdelay ?? 0});
 
 const start = async () => {
   try {
-    await server.listen({ port: 4000 });
+    await server.listen({ host: "0.0.0.0", port: 4000 });
     console.log("Server is running at http://localhost:4000");
   } catch (err) {
     server.log.error(err);

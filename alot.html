@@ -1,15 +1,21 @@
 <html>
   <head>
-    <script src="script.js?delay=1500&c=1"></script>
-    <script src="script.js?delay=1500&c=2"></script>
+    <script src="script.js?delay=1000&c=1"></script>
+    <script src="script.js?delay=1000&c=2"></script>
+    <script src="script.js?delay=500&c=3"></script>
+    <script src="script.js?delay=500&c=4"></script>
+    <script src="script.js?delay=500&c=5"></script>
+    <script src="script.js?delay=500&c=6"></script>
+    <script src="script.js?delay=500&c=7"></script>
 
-    <script src="script.js?delay=1500&c=3" defer></script>
-    <script src="script.js?delay=1500&c=4" defer></script>
+    <script src="script.js?delay=1000&c=8" defer></script>
+    <script src="script.js?delay=1000&c=9" defer></script>
     <link rel="stylesheet" href="index.css" />
+    <link rel="preload" href="font.woff" as="font" />
   </head>
   <body>
     <main>
-      <h1>Delayed loading only</h1>
+      <h1>A lot of requests</h1>
       <img src="image.jpg?c=1" alt="Test Image" />
       <img src="image.jpg?c=2" alt="Test Image" />
       <img src="image.jpg?c=3" alt="Test Image" />
