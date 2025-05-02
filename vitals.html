@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <script src="script.js?delay=1000&c=1&clientdelay=1000"></script>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Web vitals measurements</h1>
+      <img src="image.jpg?c=1" alt="Test Image" />
+      <img src="image.jpg?c=2" alt="Test Image" />
+      <img src="image.jpg?c=3" alt="Test Image" />
+      <img src="image.jpg?c=4" alt="Test Image" />
+      <img src="image.jpg?c=5" alt="Test Image" />
+      <img src="image.jpg?c=6" alt="Test Image" />
+      <img src="image.jpg?c=7" alt="Test Image" />
+      <img src="image.jpg?c=8" alt="Test Image" />
+      <img src="image.jpg?c=9" alt="Test Image" />
+      <img src="image.jpg?c=10" alt="Test Image" />
+    </main>
+
+    <script type="module">
+      import {
+        onCLS,
+        onINP,
+        onLCP,
+        onTTFB,
+        onFCP,
+      } from 'https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.js?module';
+
+      onCLS(console.log, {
+        reportAllChanges: true,
+      });
+      onINP(console.log, {
+        reportAllChanges: true,
+      });
+      onLCP(console.log, {
+        reportAllChanges: true,
+      });
+      onTTFB(console.log);
+      onFCP(console.log, {
+        reportAllChanges: true,
+      });
+    </script>
+  </body>
+</html>
