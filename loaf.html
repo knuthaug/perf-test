@@ -1,6 +1,6 @@
 <html>
   <head>
-    <script src="script.js?c=2&clientdelay=1000"></script>
+    <script src="script.js?c=2&delay=250&clientdelay=666"></script>
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
@@ -19,12 +19,25 @@
     </main>
 
     <script type="text/javascript">
-      const observer = new PerformanceObserver(list => {
-        for (const entry of list.getEntries()) {
-            console.log(entry);
+        const observer = new PerformanceObserver(list => {
+          for (const entry of list.getEntries()) {
+              performance.measure('LoAF', {
+        start: entry.startTime,
+        end: entry.startTime + entry.duration,
+        detail: {
+          devtools: {
+            dataType: "track-entry",
+            track: "Long animation frames",
+            trackGroup: "Performance Timeline",
+            color: "tertiary-dark",
+            tooltipText: 'LoAF'
           }
-        });
-      observer.observe({ type: 'long-animation-frame', buffered: true });
+        }
+      });
+      console.log(entry);
+            }
+          });
+        observer.observe({ type: 'long-animation-frame', buffered: true });
     </script>
   </body>
 </html>

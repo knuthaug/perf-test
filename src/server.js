@@ -4,15 +4,6 @@ import fs from "fs";
 const server = fastify({ logger: true });
 await server.register(fastifyPrintRoutes);
 
-server.get("/style.css", async (request, reply) => {
-  const { delay } = request.query;
-  if (delay) {
-    await new Promise((resolve) => setTimeout(resolve, delay));
-  }
-  reply.type("text/css").code(200);
-  reply.send("body { background-color: white; }");
-});
-
 server.get("/image.jpg", async (request, reply) => {
   const { delay } = request.query;
   if (delay) {
@@ -26,6 +17,7 @@ server.get("/image.jpg", async (request, reply) => {
     return;
   }
 
+  reply.header("Server-Timing", `image;dur=${delay ?? 100}`);
   const stream = fs.createReadStream(`./img.jpg`);
   const buffer = await stream2buffer(stream);
   reply.code(200).type("image/jpeg").send(buffer);
@@ -43,10 +35,20 @@ server.get("/bigimage.avif", async (request, reply) => {
     reply.code(404).send("File not found");
     return;
   }
-
+  reply.header("Server-Timing", `image;dur=${delay ?? 100}`);
   const stream = fs.createReadStream(`./img.jpg`);
   const buffer = await stream2buffer(stream);
   reply.code(200).type("image/jpeg").send(buffer);
+});
+
+server.get("/index2.css", async (request, reply) => {
+  const { delay } = request.query;
+  if (delay) {
+    await new Promise((resolve) => setTimeout(resolve, delay));
+  }
+
+  const stream = fs.createReadStream(`./index2.css`);
+  reply.type("text/css").send(stream);
 });
 
 server.get("/:file", (request, reply) => {
@@ -60,20 +62,11 @@ server.get("/:file", (request, reply) => {
   reply.type("text/html").send(stream);
 });
 
-server.get("/index.css", async (request, reply) => {
-  const { delay } = request.query;
-  if (delay) {
-    await new Promise((resolve) => setTimeout(resolve, delay));
-  }
-
-  const stream = fs.createReadStream(`./index.css`);
-  reply.type("text/css").send(stream);
-});
-
 server.get("/", (request, reply) => {
   const stream = fs.createReadStream(`./index.html`);
   reply.type("text/html").send(stream);
 });
+
 server.get("/font.woff", (request, reply) => {
   const stream = fs.createReadStream(`./font.woff`);
   reply.type("font/woff2").send(stream);
@@ -84,6 +77,7 @@ server.get("/script.js", async (request, reply) => {
 
   if (delay) {
     await new Promise((resolve) => setTimeout(resolve, delay));
+    reply.header("Server-Timing", `script;dur=${delay}`);
   }
 
   reply.type("text/javascript").code(200);
