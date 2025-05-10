@@ -5,7 +5,7 @@
   </head>
   <body>
     <main>
-      <h1>Web vitals measurements</h1>
+      <h1><a href="/">Web vitals measurements</a></h1>
       <button id="button">Click me</button>
       <img id="firstimage" src="image.jpg?c=1" alt="Test Image" />
       <img src="image.jpg?c=2" alt="Test Image" />
@@ -51,7 +51,6 @@
 
           button.addEventListener('click', async (event) => {
             console.log('Button clicked');
-            await new Promise((resolve) => setTimeout(resolve, 300));
             const image = document.querySelector('#firstimage');
             image.style.width = '150%'
             image.getBoundingClientRect();

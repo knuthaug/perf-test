@@ -9,6 +9,11 @@ main {
   display: grid;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 ul {
   list-style: none;
   padding: 6px;

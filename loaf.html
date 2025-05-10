@@ -5,7 +5,8 @@
   </head>
   <body>
     <main>
-      <h1>Long Animation frame</h1>
+      <h1><a href="/">Long Animation frame</a></h1>
+      <button id="button">Click me</button>
       <img src="image.jpg?c=1" alt="Test Image" />
       <img src="image.jpg?c=2" alt="Test Image" />
       <img src="image.jpg?c=3" alt="Test Image" />
@@ -38,6 +39,24 @@
             }
           });
         observer.observe({ type: 'long-animation-frame', buffered: true });
+
+         const button = document.querySelector('#button');
+
+          button.addEventListener('mouseover', (event) => {
+            console.log('Button hovered');
+            console.log(fibonacci(40));
+          });
+
+           button.addEventListener('click', async (event) => {
+            console.log('Button clicked');
+            event.target.classList.add('bigger');
+          });
+
+           function fibonacci(n) {
+            return n < 1 ? 0
+              : n <= 2 ? 1
+              : fibonacci(n - 1) + fibonacci(n - 2)
+      }
     </script>
   </body>
 </html>
