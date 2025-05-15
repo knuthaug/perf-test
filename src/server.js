@@ -31,14 +31,14 @@ server.get("/bigimage.avif", async (request, reply) => {
     await new Promise((resolve) => setTimeout(resolve, 100));
   }
 
-  if (!fs.existsSync(`./img.jpg`)) {
+  if (!fs.existsSync(`./bigimage.avif`)) {
     reply.code(404).send("File not found");
     return;
   }
   reply.header("Server-Timing", `image;dur=${delay ?? 100}`);
-  const stream = fs.createReadStream(`./img.jpg`);
+  const stream = fs.createReadStream(`./bigimage.avif`);
   const buffer = await stream2buffer(stream);
-  reply.code(200).type("image/jpeg").send(buffer);
+  reply.code(200).type("image/avif").send(buffer);
 });
 
 server.get("/index2.css", async (request, reply) => {

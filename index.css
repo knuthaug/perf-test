@@ -9,6 +9,11 @@ main {
   display: grid;
 }
 
+body {
+  font-size: 150%;
+  line-height: 1.3em;
+}
+
 h1 a {
   text-decoration: none;
   color: black;
