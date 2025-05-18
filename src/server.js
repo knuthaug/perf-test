@@ -38,17 +38,7 @@ server.get("/bigimage.avif", async (request, reply) => {
   reply.header("Server-Timing", `image;dur=${delay ?? 100}`);
   const stream = fs.createReadStream(`./bigimage.avif`);
   const buffer = await stream2buffer(stream);
-  reply.code(200).type("image/avif").send(buffer);
-});
-
-server.get("/index2.css", async (request, reply) => {
-  const { delay } = request.query;
-  if (delay) {
-    await new Promise((resolve) => setTimeout(resolve, delay));
-  }
-
-  const stream = fs.createReadStream(`./index2.css`);
-  reply.type("text/css").send(stream);
+  reply.code(200).type("image/").send(buffer);
 });
 
 server.get("/:file", (request, reply) => {
@@ -59,7 +49,7 @@ server.get("/:file", (request, reply) => {
     return;
   }
   const stream = fs.createReadStream(`./${file}`);
-  reply.type("text/html").send(stream);
+  reply.type(file === "index.css" ? "text/css" : "text/html").send(stream);
 });
 
 server.get("/", (request, reply) => {
